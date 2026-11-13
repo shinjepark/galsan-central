@@ -79,7 +79,7 @@ button{font:inherit;cursor:pointer;background:none;border:0}
 .m-btn{display:none}
 @media(max-width:1100px){
   :root{--hd:64px}
-  .m-tel{display:block;position:absolute;left:50%;transform:translateX(-50%);color:#fff;font-size:18px;font-weight:800;letter-spacing:.02em;white-space:nowrap;animation:sparkle 1.8s ease-in-out infinite}
+  .m-tel{display:block;flex:1 1 auto;min-width:0;text-align:center;color:#fff;font-size:18px;font-weight:800;letter-spacing:.02em;white-space:nowrap;animation:sparkle 1.8s ease-in-out infinite}
   #header.solid .m-tel{color:var(--navy);text-shadow:none}
   .bt-cs{display:none}
   .m-btn{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:46px;height:46px;padding:11px 10px;border-radius:10px;background:rgba(255,255,255,.16);backdrop-filter:blur(3px);flex:0 0 auto}
@@ -111,14 +111,25 @@ button{font:inherit;cursor:pointer;background:none;border:0}
 .hero .slide .bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.06)}
 .hero .slide.on .bg{animation:kb 7s ease forwards}
 @keyframes kb{to{transform:scale(1)}}
-.hero .slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,20,24,.5),rgba(16,20,24,.18) 45%,rgba(16,20,24,.62))}
+.hero .slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,16,26,.26),rgba(10,16,26,.02) 42%,rgba(10,16,26,.30))}
+.hero .slide .bg{filter:saturate(1.14) contrast(1.05) brightness(1.04)}
 .hero .in{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:clamp(70px,10vh,120px)}
+.hero .in::before{content:"";position:absolute;inset:0 0 0 -999px;z-index:-1;
+  background:radial-gradient(120% 105% at 18% 78%,rgba(6,12,22,.55) 0%,rgba(6,12,22,.38) 42%,rgba(6,12,22,.12) 66%,transparent 82%)}
+.hero .in>*{position:relative}
 .hero .eyebrow{color:rgba(255,255,255,.75)}
-.hero-site{font-family:var(--serif);font-size:clamp(16px,2vw,22px);font-weight:700;letter-spacing:.14em;color:#7FC0D0;text-shadow:0 1px 10px rgba(8,20,26,.6)}
-.hero h1{font-family:var(--serif);font-size:clamp(30px,5.6vw,60px);font-weight:900;line-height:1.24;letter-spacing:-.02em;color:#55A8BC;text-shadow:0 1px 12px rgba(8,20,26,.65);margin-top:16px}
-.hero h1 .qm{font-size:1.08em;color:#7FC0D0}
+.hero-site{font-family:var(--serif);font-size:clamp(16px,2vw,22px);font-weight:700;letter-spacing:.14em;color:#A8E4F4;text-shadow:0 1px 12px rgba(6,12,22,.75),0 0 22px rgba(140,220,244,.35);animation:tealGlow 3.2s ease-in-out infinite}
+.hero h1{font-family:var(--serif);font-size:clamp(30px,5.6vw,60px);font-weight:900;line-height:1.24;letter-spacing:-.02em;color:#fff;margin-top:16px;
+  text-shadow:0 2px 14px rgba(6,12,22,.78),0 1px 4px rgba(6,12,22,.5)}
+.hero h1 .qm{font-size:1.08em;color:#A8E4F4;text-shadow:0 0 18px rgba(140,220,244,.55)}
+/* 글로우는 h1 내부 래퍼가 담당 (fly 충돌 제거) */
+.glow{display:inline-block;animation:heroGlow 4.2s ease-in-out infinite}
+@keyframes heroGlow{0%,100%{filter:drop-shadow(0 2px 6px rgba(6,12,22,.55))}50%{filter:drop-shadow(0 0 22px rgba(168,228,244,.85)) drop-shadow(0 2px 6px rgba(6,12,22,.55))}}
+@keyframes tealGlow{0%,100%{text-shadow:0 1px 12px rgba(6,12,22,.75),0 0 22px rgba(140,220,244,.35)}50%{text-shadow:0 1px 12px rgba(6,12,22,.75),0 0 38px rgba(168,228,244,.7)}}
+@media(prefers-reduced-motion:reduce){.hero h1,.hero-site{animation:none}}
 /* 날아와서 박히는 애니메이션 */
-.fly{opacity:0;transform:translateY(84px) scale(1.08);animation:flyIn 1s cubic-bezier(.16,1.4,.3,1) forwards}
+.fly{animation:flyIn 1s cubic-bezier(.16,1.4,.3,1) both}
+@media(prefers-reduced-motion:reduce){.fly{animation:none}}
 .fly.d1{animation-delay:.2s}.fly.d2{animation-delay:.5s}.fly.d3{animation-delay:.8s}
 @keyframes flyIn{0%{opacity:0;transform:translateY(84px) scale(1.08)}72%{opacity:1;transform:translateY(-7px) scale(.99)}86%{transform:translateY(3px) scale(1.004)}100%{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.fly{animation:none;opacity:1;transform:none}}
@@ -233,12 +244,6 @@ details.faq .src{display:block;margin-top:10px;font-size:12px;color:var(--gray2)
 .side-card strong{display:block;font-size:19px;font-weight:800;margin-top:8px;letter-spacing:-.02em}
 .side-card span{display:block;font-size:13px;color:var(--gray1);margin-top:4px}
 
-/* ── 커뮤니티 ── */
-#community{background:var(--soft)}
-.comm-grid{display:grid;gap:20px;grid-template-columns:1fr 1fr;margin-top:clamp(28px,4vw,48px)}
-.comm-grid .shot.wide{grid-column:1/-1}
-@media(max-width:640px){.comm-grid{grid-template-columns:1fr}}
-
 /* ── 등록 CTA ── */
 #register{background:linear-gradient(135deg,#1D0A3E 0%,#4318B8 60%,#7935F8 135%);color:#fff;text-align:center}
 #register .eyebrow{color:rgba(255,255,255,.55)}
@@ -328,11 +333,11 @@ footer .legal{margin-top:14px;color:rgba(255,255,255,.38);font-size:11.5px}
       <img class="logo-img" src="images/logo-main.png" alt="중앙하이츠 갈산역 센트럴">
     </a>
     <nav class="gnb" aria-label="주요 메뉴">
-      <a href="#intro">사업안내</a><a href="#premium">단지안내</a><a href="#unit">세대안내</a><a href="#danji">배치도</a><a href="#community">커뮤니티</a><a href="#terms">분양조건</a><a href="#price">분양가</a><a href="#faq">FAQ</a><a href="gallery.html">갤러리</a>
+      <a href="#intro">사업안내</a><a href="#premium">단지안내</a><a href="#unit">세대안내</a><a href="#danji">배치도</a><a href="#terms">분양조건</a><a href="#price">분양가</a><a href="#faq">FAQ</a><a href="gallery.html">갤러리</a>
     </nav>
+    <a href="tel:18662766" class="m-tel num" aria-label="분양문의 전화">1866-2766</a>
     <div class="utill">
       <a href="tel:18662766" class="bt-tel num">1866-2766</a>
-      <a href="tel:18662766" class="m-tel num" aria-label="분양문의 전화">1866-2766</a>
       <button class="bt-cs" data-open-form>방문예약등록</button>
       <button class="m-btn" id="mBtn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mnav"><i></i><i></i><i></i></button>
     </div>
@@ -345,7 +350,7 @@ footer .legal{margin-top:14px;color:rgba(255,255,255,.38);font-size:11.5px}
   <aside class="panel" role="dialog" aria-modal="true" aria-label="메뉴">
     <button class="x" data-close-mnav aria-label="메뉴 닫기">×</button>
     <nav>
-      <a href="#intro">사업안내</a><a href="#premium">단지안내</a><a href="#unit">세대안내</a><a href="#danji">배치도</a><a href="#community">커뮤니티</a><a href="#terms">분양조건</a><a href="#price">분양가</a><a href="#faq">FAQ</a><a href="gallery.html">갤러리</a>
+      <a href="#intro">사업안내</a><a href="#premium">단지안내</a><a href="#unit">세대안내</a><a href="#danji">배치도</a><a href="#terms">분양조건</a><a href="#price">분양가</a><a href="#faq">FAQ</a><a href="gallery.html">갤러리</a>
     </nav>
     <button class="btn" data-open-form>방문예약등록</button>
   </aside>
@@ -357,7 +362,7 @@ footer .legal{margin-top:14px;color:rgba(255,255,255,.38);font-size:11.5px}
   <div class="slide"><div class="bg" style="background-image:url(images/site/slide2.webp)"></div></div>
   <div class="wrap in">
     <div class="hero-site fly d1">중앙하이츠 갈산역 센트럴</div>
-    <h1 class="fly d2"><span class="qm">“</span>갈산역 「0분」의 가치,<br>걸어서 누리는 완성된 프리미엄<span class="qm">”</span></h1>
+    <h1 class="fly d2"><span class="glow"><span class="qm">“</span>갈산역 「0분」의 가치,<br>걸어서 누리는 완성된 프리미엄<span class="qm">”</span></span></h1>
     <div class="badge-row">
       <span class="badge">내집앞 갈산역 초역세권 지하철</span>
       <span class="badge">내집앞 수변공원 초공세권</span>
@@ -543,22 +548,6 @@ footer .legal{margin-top:14px;color:rgba(255,255,255,.38);font-size:11.5px}
         <div class="side-card"><b>상담</b><strong>남은 호수 안내</strong><span>1866-2766 또는 방문예약등록</span></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ═══ 커뮤니티 ═══ -->
-<section class="sec" id="community">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2 style="margin-top:12px">커뮤니티</h2>
-      <p class="sub">입주민을 위한 프리미엄 커뮤니티 시설</p>
-    </div>
-    <div class="comm-grid">
-      <figure class="shot wide"><img width="1300" height="530" src="images/site/community-top.webp" alt="중앙하이츠 갈산역 센트럴 커뮤니티 배치" loading="lazy" decoding="async"><figcaption>커뮤니티 배치 — 이미지를 누르면 확대됩니다</figcaption></figure>
-      <figure class="shot"><img width="1300" height="731" src="images/site/gym1.webp" alt="피트니스 센터 (B101호)" loading="lazy" decoding="async"><figcaption>피트니스 센터 · B101호 — 이미지를 누르면 확대됩니다</figcaption></figure>
-      <figure class="shot"><img width="1300" height="731" src="images/site/gym2.webp" alt="피트니스 센터 내부 — 최신 운동기구 완비" loading="lazy" decoding="async"><figcaption>피트니스 센터 내부 · 최신 운동기구 완비 — 이미지를 누르면 확대됩니다</figcaption></figure>
-    </div>
-    <p class="note" style="margin-top:18px">※ 상기 CG 이미지는 소비자의 이해를 돕기 위한 것으로 실제와 차이가 있을 수 있으며, 커뮤니티 시설은 사업주체 및 관계기관 사정에 따라 변경될 수 있습니다.</p>
   </div>
 </section>
 
