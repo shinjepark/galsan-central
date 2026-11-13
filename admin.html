@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>관리자 | 중앙하이츠 갈산역 센트럴</title>
+<link rel="icon" href="images/favicon-32.png">
+<style>
+:root{--ink:#1b2a35;--navy:#0d3b5e;--blue:#1668a8;--blue2:#0f4f81;--white:#fff;--sky:#edf4f9;--mist:#eff3f5;
+--muted:#5d6a74;--line:rgba(13,59,94,.25);--line2:rgba(27,42,53,.09);--red:#c0392b;
+--sans:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6}
+.wrap{max-width:1400px;margin:0 auto;padding:22px 18px 60px}
+h1{font-size:21px;margin:0;letter-spacing:-.03em;color:var(--navy)}
+h1 small{display:block;font-size:11.5px;color:var(--muted);font-weight:400;letter-spacing:0;margin-top:4px}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.card{background:var(--white);border:1px solid var(--line2);border-radius:8px;padding:18px}
+.login{max-width:380px;margin:12vh auto;border-top:4px solid var(--blue);text-align:center}
+.login h1{margin-bottom:6px}
+.login p{color:var(--muted);font-size:13px;margin:0 0 20px}
+.login input{width:100%;padding:13px 14px;border:1px solid var(--line2);border-radius:6px;margin-bottom:12px}
+.login button{width:100%;padding:14px;background:var(--navy);color:#fff;border:0;border-radius:6px;font-weight:700}
+.login .msg{color:var(--red);font-size:12.5px;min-height:18px;margin-top:10px}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.hd .act{display:flex;gap:8px;flex-wrap:wrap}
+.btn{padding:10px 16px;border:1px solid var(--line2);background:var(--white);border-radius:6px;font-size:13px;font-weight:700}
+.btn:hover{background:var(--sky)}
+.btn-p{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn-p:hover{background:var(--blue2)}
+.kpis{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:18px}
+.kpi{background:var(--white);border:1px solid var(--line2);border-left:3px solid var(--blue);border-radius:8px;padding:15px 17px}
+.kpi .l{font-size:11.5px;color:var(--muted);letter-spacing:.02em}
+.kpi .v{font-size:26px;font-weight:800;letter-spacing:-.03em;margin-top:5px;font-variant-numeric:tabular-nums}
+.grid2{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:960px){.grid2{grid-template-columns:1fr 1fr}}
+h2{font-size:14px;margin:0 0 14px;letter-spacing:-.01em}
+h2 span{font-weight:400;color:var(--muted);font-size:12px;margin-left:6px}
+.bars{display:grid;gap:7px}
+.bar{display:grid;grid-template-columns:104px 1fr 52px;gap:10px;align-items:center;font-size:12.5px}
+.bar .n{color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .t{height:9px;background:var(--mist);border-radius:5px;overflow:hidden}
+.bar .t i{display:block;height:100%;background:var(--blue);border-radius:5px}
+.bar .v{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.chart{display:flex;align-items:flex-end;gap:4px;height:130px;padding-top:8px}
+.chart .c{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%}
+.chart .c i{width:100%;background:var(--blue);border-radius:2px 2px 0 0;min-height:2px;display:block}
+.chart .c b{font-size:10px;color:var(--muted);font-weight:700}
+.chart .c em{font-size:9.5px;color:var(--muted);font-style:normal;writing-mode:vertical-rl;height:34px;overflow:hidden}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:20px 0 12px}
+.toolbar input[type=search]{flex:1;min-width:180px;padding:11px 13px;border:1px solid var(--line2);border-radius:6px;background:var(--white)}
+.toolbar select{padding:11px 13px;border:1px solid var(--line2);border-radius:6px;background:var(--white)}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:13px}
+th,td{padding:11px 10px;border-bottom:1px solid var(--line2);text-align:left;vertical-align:middle}
+th{background:var(--sky);font-size:11.5px;color:var(--muted);letter-spacing:.02em;white-space:nowrap;position:sticky;top:0}
+tbody tr:hover{background:#f6fafd}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--muted);font-size:12px}
+td.p{font-variant-numeric:tabular-nums;white-space:nowrap}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;background:var(--mist);font-size:11.5px;white-space:nowrap}
+.tag.g{background:rgba(22,104,168,.12);color:var(--blue2);font-weight:700}
+.rowbtn{padding:5px 10px;border:1px solid var(--line2);background:var(--white);border-radius:4px;font-size:11.5px}
+.rowbtn:hover{background:var(--sky)}
+.tblwrap{overflow:auto;max-height:66vh;border:1px solid var(--line2);border-radius:8px;background:var(--white)}
+.empty{padding:44px;text-align:center;color:var(--muted)}
+.modal{position:fixed;inset:0;background:rgba(8,20,30,.55);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
+.modal.on{display:flex}
+.modal .box{background:var(--white);border-radius:10px;max-width:420px;width:100%;padding:24px}
+.modal h3{margin:0 0 16px;font-size:16px}
+.modal label{display:block;font-size:12px;color:var(--muted);margin:12px 0 5px}
+.modal input{width:100%;padding:11px 12px;border:1px solid var(--line2);border-radius:6px}
+.modal .f{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
+.hide{display:none !important}
+</style>
+</head>
+<body>
+
+<!-- ══ 로그인 ══ -->
+<div id="loginView" class="wrap">
+  <form class="card login" id="loginForm">
+    <h1>관리자<small>중앙하이츠 갈산역 센트럴 · 관심고객 관리</small></h1>
+    <p>비밀번호를 입력해 주세요.</p>
+    <input type="password" id="pw" placeholder="비밀번호" autocomplete="current-password">
+    <button type="submit">확인</button>
+    <div class="msg" id="loginMsg"></div>
+  </form>
+</div>
+
+<!-- ══ 대시보드 ══ -->
+<div id="dashView" class="wrap hide">
+  <div class="hd">
+    <h1>관심고객 관리<small id="subTitle">중앙하이츠 갈산역 센트럴</small></h1>
+    <div class="act">
+      <button class="btn" id="refreshBtn">새로고침</button>
+      <button class="btn btn-p" id="csvBtn">엑셀(CSV) 저장</button>
+      <button class="btn" id="logoutBtn">로그아웃</button>
+    </div>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="grid2">
+    <div class="card"><h2>유입경로별<span>신청 건수</span></h2><div class="bars" id="chBars"></div></div>
+    <div class="card"><h2>채널별 전환율<span>방문 대비 신청</span></h2><div class="bars" id="convBars"></div></div>
+  </div>
+
+  <div class="grid2" style="margin-top:14px">
+    <div class="card"><h2>연락가능 시간별<span>신청 건수</span></h2><div class="bars" id="timeBars"></div></div>
+    <div class="card"><h2>UTM 소스별<span>신청 건수</span></h2><div class="bars" id="srcBars"></div></div>
+  </div>
+
+  <div class="grid2" style="margin-top:14px">
+    <div class="card"><h2>최근 14일 추이<span>신청 건수</span></h2><div class="chart" id="dayChart"></div></div>
+    <div class="card"><h2>최근 14일 방문<span>세션 수</span></h2><div class="chart" id="dayVisit"></div></div>
+  </div>
+
+  <div class="toolbar">
+    <input type="search" id="q" placeholder="이름 · 연락처 · 유입경로 검색">
+    <select id="chFilter"><option value="">유입경로 전체</option></select>
+  </div>
+  <div class="tblwrap">
+    <table>
+      <thead><tr>
+        <th>접수일시</th><th>이름</th><th>연락처</th><th>방문일자·연락가능</th><th>유입경로</th><th>광고(UTM)</th><th>관리</th>
+      </tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══ 수정 모달 ══ -->
+<div class="modal" id="modal">
+  <form class="box" id="editForm">
+    <h3>신청내역 수정</h3>
+    <label>이름</label><input type="text" id="eName" maxlength="20">
+    <label>연락처</label><input type="tel" id="ePhone" maxlength="13">
+    <label>방문일자·연락가능</label><input type="text" id="eTime" maxlength="40">
+    <label>유입경로</label><input type="text" id="eChannel" maxlength="50">
+    <div class="f">
+      <button type="button" class="btn" id="eCancel">취소</button>
+      <button type="submit" class="btn btn-p">저장</button>
+    </div>
+  </form>
+</div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s)};
+var PW=sessionStorage.getItem('__gc_admin_pw')||'';
+var DATA=null;
+
+function api(body){
+  return fetch('/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+    .then(function(r){return r.json()});
+}
+
+/* ── 로그인 ── */
+$('#loginForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  PW=$('#pw').value;
+  api({password:PW}).then(function(d){
+    if(!d.ok){$('#loginMsg').textContent='비밀번호가 올바르지 않습니다.';return}
+    sessionStorage.setItem('__gc_admin_pw',PW);
+    $('#loginView').classList.add('hide');
+    $('#dashView').classList.remove('hide');
+    load();
+  }).catch(function(){$('#loginMsg').textContent='서버와 통신할 수 없습니다.'});
+});
+$('#logoutBtn').addEventListener('click',function(){
+  sessionStorage.removeItem('__gc_admin_pw');location.reload();
+});
+$('#refreshBtn').addEventListener('click',load);
+
+/* ── 조회 ── */
+function load(){
+  api({password:PW}).then(function(d){
+    if(!d.ok){alert('조회 실패: '+((d&&d.error)||''));return}
+    DATA=d;render(d);
+  }).catch(function(e){alert('서버와 통신할 수 없습니다.')});
+}
+
+function bar(el,list){
+  var max=Math.max.apply(null,[1].concat(list.map(function(x){return x.v})));
+  el.innerHTML=list.length?list.map(function(x){
+    return '<div class="bar"><span class="n">'+esc(x.k)+'</span><span class="t"><i style="width:'+Math.round(x.v/max*100)+'%"></i></span><span class="v num">'+x.v+'</span></div>';
+  }).join(''):'<div class="empty">데이터가 없습니다</div>';
+}
+function chart(el,list,cls){
+  var max=Math.max.apply(null,[1].concat(list.map(function(x){return x.v})));
+  el.innerHTML=list.map(function(x){
+    return '<div class="c"><i class="'+(cls||'')+'" style="height:'+Math.max(3,Math.round(x.v/max*100))+'%"></i><b>'+x.v+'</b><em>'+x.k.slice(5)+'</em></div>';
+  }).join('');
+}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+
+function render(d){
+  $('#subTitle').textContent='중앙하이츠 갈산역 센트럴 · 총 '+d.total+'건';
+  $('#kpis').innerHTML=
+    kpi('누적 신청',d.total+'건')+
+    kpi('오늘',d.todayCount+'건')+
+    kpi('최근 7일',d.weekCount+'건')+
+    kpi('누적 방문(세션)',(d.visits?d.visits.total:0)+'건')+
+    kpi('순수 신규 방문자',(d.visits?d.visits.newV:0)+'명');
+  bar($('#chBars'),d.stats.byChannel);
+  bar($('#convBars'),d.conversion.map(function(c){
+    return {k:c.k+' ('+(c.rate==null?'-':c.rate+'%')+')',v:c.leads};
+  }));
+  bar($('#timeBars'),d.stats.byTime);
+  bar($('#srcBars'),d.stats.bySource);
+  chart($('#dayChart'),d.stats.byDay);
+  chart($('#dayVisit'),d.visitLeadByDay.map(function(x){return{k:x.k,v:x.visits}}));
+  /* 채널 필터 */
+  var sel=$('#chFilter'),cur=sel.value;
+  sel.innerHTML='<option value="">유입경로 전체</option>';
+  d.stats.byChannel.forEach(function(c){
+    var o=document.createElement('option');o.value=c.k;o.textContent=c.k+' ('+c.v+')';sel.appendChild(o);
+  });
+  sel.value=cur;
+  drawRows();
+}
+function kpi(l,v){return '<div class="kpi"><div class="l">'+l+'</div><div class="v">'+v+'</div></div>'}
+
+function drawRows(){
+  if(!DATA)return;
+  var q=$('#q').value.trim().toLowerCase(),ch=$('#chFilter').value;
+  var rows=DATA.rows.filter(function(r){
+    if(ch&&r.channel!==ch)return false;
+    if(!q)return true;
+    return [r.name,r.phone,r.channel,r.utm_source,r.utm_campaign].join(' ').toLowerCase().indexOf(q)>-1;
+  });
+  var tb=$('#tbody');
+  if(!rows.length){tb.innerHTML='<tr><td colspan="7"><div class="empty">조건에 맞는 내역이 없습니다</div></td></tr>';return}
+  tb.innerHTML=rows.map(function(r){
+    var utm=[r.utm_source,r.utm_medium,r.utm_campaign].filter(Boolean).join(' / ');
+    return '<tr>'+
+      '<td class="n">'+esc(r.created_at)+'</td>'+
+      '<td><b>'+esc(r.name)+'</b></td>'+
+      '<td class="p">'+esc(r.phone)+'</td>'+
+      '<td>'+(r.contact_time?'<span class="tag g">'+esc(r.contact_time)+'</span>':'-')+'</td>'+
+      '<td>'+(r.channel?'<span class="tag">'+esc(r.channel)+'</span>':'-')+'</td>'+
+      '<td class="n">'+(esc(utm)||'-')+'</td>'+
+      '<td style="white-space:nowrap"><button class="rowbtn" data-edit="'+r.id+'">수정</button> <button class="rowbtn" data-del="'+r.id+'" data-name="'+esc(r.name)+'">삭제</button></td>'+
+      '</tr>';
+  }).join('');
+}
+$('#q').addEventListener('input',drawRows);
+$('#chFilter').addEventListener('change',drawRows);
+
+/* ── 수정 / 삭제 ── */
+var editId=0;
+document.addEventListener('click',function(e){
+  var b=e.target.closest('[data-edit]');
+  if(b){
+    editId=+b.getAttribute('data-edit');
+    var r=DATA.rows.filter(function(x){return x.id===editId})[0];
+    if(!r)return;
+    $('#eName').value=r.name||'';$('#ePhone').value=r.phone||'';
+    $('#eTime').value=r.contact_time||'';$('#eChannel').value=r.channel||'';
+    $('#modal').classList.add('on');
+    return;
+  }
+  var del=e.target.closest('[data-del]');
+  if(del){
+    if(!confirm(del.getAttribute('data-name')+' 건을 삭제할까요? 되돌릴 수 없습니다.'))return;
+    api({password:PW,action:'delete',id:+del.getAttribute('data-del')}).then(function(d){
+      if(!d.ok){alert('삭제 실패');return}
+      load();
+    });
+  }
+});
+$('#eCancel').addEventListener('click',function(){$('#modal').classList.remove('on')});
+$('#editForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  api({password:PW,action:'update',id:editId,
+    name:$('#eName').value,phone:$('#ePhone').value,
+    contact_time:$('#eTime').value,channel:$('#eChannel').value
+  }).then(function(d){
+    if(!d.ok){alert('수정 실패');return}
+    $('#modal').classList.remove('on');
+    load();
+  });
+});
+
+/* ── CSV ── */
+$('#csvBtn').addEventListener('click',function(){
+  if(!DATA||!DATA.rows.length){alert('저장할 내역이 없습니다.');return}
+  var head=['접수일시','이름','연락처','방문일자·연락가능','유입경로','utm_source','utm_medium','utm_campaign','referrer','페이지'];
+  var rows=DATA.rows.map(function(r){
+    return [r.created_at,r.name,'\u200B'+r.phone,r.contact_time,r.channel,r.utm_source,r.utm_medium,r.utm_campaign,r.referrer,r.page_url];
+  });
+  var csv='\uFEFF'+[head].concat(rows).map(function(r){
+    return r.map(function(v){return '"'+String(v==null?'':v).replace(/"/g,'""')+'"'}).join(',');
+  }).join('\r\n');
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+  a.download='galsan-central-leads.csv';a.click();
+});
+
+/* 자동 로그인 복원 */
+if(PW){api({password:PW}).then(function(d){
+  if(d&&d.ok){$('#loginView').classList.add('hide');$('#dashView').classList.remove('hide');DATA=d;render(d)}
+})}
+})();
+</script>
+</body>
+</html>
