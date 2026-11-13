@@ -160,6 +160,14 @@ table.price{width:100%;min-width:560px;border-collapse:collapse;font-variant-num
 .price td.floor{font-weight:800;color:var(--ink)}
 .price td.new{font-weight:800;color:var(--violet-600)}
 
+/* ── 갤러리 (홈 내장) ── */
+#gallery-home{background:var(--soft)}
+.g-grid{display:grid;gap:14px;grid-template-columns:1fr 1fr;margin-top:clamp(28px,4vw,48px)}
+@media(min-width:901px){.g-grid{grid-template-columns:repeat(3,1fr);gap:18px}}
+.g-item{position:relative;overflow:hidden;border-radius:6px;cursor:zoom-in;background:var(--soft)}
+.g-item img{width:100%;height:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .6s ease}
+.g-item:hover img{transform:scale(1.04)}
+
 /* ── FAQ ── */
 #faq{background:#fff}
 .faq-list{margin-top:clamp(28px,4vw,48px);max-width:920px}
@@ -559,6 +567,25 @@ footer .legal{margin-top:14px;color:rgba(255,255,255,.38);font-size:11.5px}
       <p class="sub">저층부 단지 내 상업시설 — 걸어서 누리는 중심상권</p>
     </div>
     <figure class="shot" style="margin-top:clamp(28px,4vw,48px)"><img width="1300" height="2450" src="images/site/commercial1.webp" alt="중앙하이츠 갈산역 센트럴 상업시설" loading="lazy" decoding="async"><figcaption>상업시설 — 이미지를 누르면 확대됩니다</figcaption></figure>
+  </div>
+</section>
+
+<!-- ═══ 갤러리 (홈 내장) ═══ -->
+<section class="sec" id="gallery-home">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2 style="margin-top:12px">현장 갤러리</h2>
+      <p class="sub">실내·공간 갤러리 — <a href="gallery.html" style="color:var(--violet-600);text-decoration:underline">전체 갤러리 보기</a></p>
+    </div>
+    <div class="g-grid">
+      <figure class="g-item reveal"><img src="images/gallery/gallery-01.webp" alt="갤러리 1" loading="lazy" decoding="async"></figure>
+      <figure class="g-item reveal"><img src="images/gallery/gallery-02.webp" alt="갤러리 2" loading="lazy" decoding="async"></figure>
+      <figure class="g-item reveal"><img src="images/gallery/gallery-03.webp" alt="갤러리 3" loading="lazy" decoding="async"></figure>
+      <figure class="g-item reveal"><img src="images/gallery/gallery-04.webp" alt="갤러리 4" loading="lazy" decoding="async"></figure>
+      <figure class="g-item reveal"><img src="images/gallery/gallery-05.webp" alt="갤러리 5" loading="lazy" decoding="async"></figure>
+      <figure class="g-item reveal"><img src="images/gallery/gallery-06.webp" alt="갤러리 6" loading="lazy" decoding="async"></figure>
+    </div>
+    <p class="note" style="margin-top:14px">※ 상기 이미지는 소비자의 이해를 돕기 위한 CG로 실제와 다를 수 있습니다.</p>
   </div>
 </section>
 
