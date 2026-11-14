@@ -11,7 +11,9 @@
 <meta property="og:site_name" content="중앙하이츠 갈산역 센트럴">
 <meta property="og:title" content="중앙하이츠 갈산역 센트럴 | 갈산역 0분 · 방문예약등록">
 <meta property="og:description" content="내집앞 갈산역 초역세권, 내집앞 수변공원 초공세권. 3개동 126세대 · 59TYPE 단일평형.">
-<meta property="og:image" content="/og_image.jpg">
+<link rel="canonical" href="https://galsan-central.pages.dev/">
+<meta property="og:url" content="https://galsan-central.pages.dev/">
+<meta property="og:image" content="https://galsan-central.pages.dev/images/og_image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="중앙하이츠 갈산역 센트럴">
@@ -19,6 +21,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="중앙하이츠 갈산역 센트럴">
 <meta name="twitter:description" content="갈산역 도보 0분, 59TYPE 단일평형 126세대. 방문예약등록 1866-2766">
+<meta name="twitter:image" content="https://galsan-central.pages.dev/images/og_image.jpg">
 <meta name="theme-color" content="#7935F8">
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
@@ -325,13 +328,16 @@ footer .legal{margin-top:14px;color:rgba(255,255,255,.38);font-size:11.5px}
 /* ── 입장 팝업 (공지) ── */
 #notice{position:fixed;inset:0;z-index:180;background:rgba(11,14,18,.55);display:none;align-items:center;justify-content:center;padding:18px}
 #notice.on{display:flex}
-#notice .card{width:100%;max-width:400px;background:#fff;border-radius:6px;overflow:hidden}
-#notice .pop-slides{position:relative}
-#notice .pop{display:none;width:100%;height:auto;aspect-ratio:683/1024;object-fit:contain;background:#101418}
-#notice .pop.on{display:block}
-#notice .pop-dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:7px;z-index:2}
-#notice .pop-dots span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.55);cursor:pointer;transition:background .2s}
-#notice .pop-dots span.on{background:#fff}
+#notice .card{width:100%;max-width:400px;background:#fff;border-radius:6px;overflow:hidden;flex-shrink:0}
+#notice .card.hide{display:none}
+#notice .pop{display:block;width:100%;height:auto;aspect-ratio:683/1024;object-fit:contain;background:#101418}
+@media(min-width:820px){
+#notice .popups{display:flex;flex-direction:column;justify-content:center}
+#notice .card{width:min(400px,calc((100vh - 110px)*.667))}
+@media(min-width:820px){
+#notice .popups{flex-direction:row;align-items:center;gap:18px}
+#notice .card{width:min(400px,calc((100vh - 110px)*.667))}
+}
 #notice .foot{display:flex;align-items:center;justify-content:space-between;padding:12px 14px}
 #notice .today{display:flex;gap:7px;align-items:center;font-size:12.5px;color:var(--gray1);cursor:pointer}
 #notice .today input{accent-color:var(--violet)}
@@ -705,15 +711,20 @@ footer .legal{margin-top:14px;color:rgba(255,255,255,.38);font-size:11.5px}
 
 <!-- ═══ 입장 팝업 ═══ -->
 <div id="notice" role="dialog" aria-modal="true" aria-label="안내 팝업">
-  <div class="card">
-    <div class="pop-slides">
-      <img class="pop on" src="images/popup-1.jpg" alt="갈산역 센트럴 분양 안내 1">
-      <img class="pop" src="images/popup-2.jpg" alt="갈산역 센트럴 분양 안내 2">
+  <div class="popups">
+    <div class="card" data-pop="0">
+      <img class="pop" src="images/popup-1.jpg" alt="중앙하이츠 갈산역 센트럴 즉시입주 안내">
+      <div class="foot">
+        <label class="today"><input type="checkbox" class="todayCheck"><span>오늘 하루 열지 않기</span></label>
+        <button class="bt-close" data-close-notice>닫기</button>
+      </div>
     </div>
-    <div class="pop-dots"><span class="on" data-i="0" aria-label="1번 이미지"></span><span data-i="1" aria-label="2번 이미지"></span></div>
-    <div class="foot">
-      <label class="today"><input type="checkbox" id="todayCheck"><span>오늘 하루 열지 않기</span></label>
-      <button class="bt-close" data-close-notice>닫기</button>
+    <div class="card" data-pop="1">
+      <img class="pop" src="images/popup-2.jpg" alt="갈산역 센트럴 파격 할인 선착순 특별분양 안내">
+      <div class="foot">
+        <label class="today"><input type="checkbox" class="todayCheck"><span>오늘 하루 열지 않기</span></label>
+        <button class="bt-close" data-close-notice>닫기</button>
+      </div>
     </div>
   </div>
 </div>
@@ -879,26 +890,33 @@ form.addEventListener('submit',function(e){
 
 /* ── 입장 팝업 ── */
 (function(){
-  var n=$('#notice');
-  var pops=$$('#notice .pop'),pdots=$$('#notice .pop-dots span'),pi=0;
-  var ptimer=setInterval(function(){
-    if(!n.classList.contains('on'))return;
-    pi=(pi+1)%pops.length;
-    pops.forEach(function(im,k){im.classList.toggle('on',k===pi)});
-    pdots.forEach(function(d,k){d.classList.toggle('on',k===pi)});
-  },4200);
-  pdots.forEach(function(d,k){d.addEventListener('click',function(){pi=k;
-    pops.forEach(function(im,q){im.classList.toggle('on',q===k)});
-    pdots.forEach(function(dd,q){dd.classList.toggle('on',q===k)});
-  })});
-  try{if(localStorage.getItem('__gc_pop_hide')===day)return}catch(e){}
-  setTimeout(function(){n.classList.add('on');document.body.classList.add('lock')},600);
-  function close(){n.classList.remove('on');document.body.classList.remove('lock')}
-  n.querySelector('[data-close-notice]').addEventListener('click',function(){
-    if($('#todayCheck').checked){try{localStorage.setItem('__gc_pop_hide',day)}catch(e){}}
-    close();
+  var n=$('#notice'),cards=$$('#notice .card');
+  var day=new Date().toISOString().slice(0,10);
+  var pc=matchMedia('(min-width:820px)');
+  var cur=0;
+  function closeAll(){n.classList.remove('on');document.body.classList.remove('lock')}
+  function openPop(){
+    if(pc.matches){cards.forEach(function(c){c.classList.remove('hide')})}
+    else{cur=0;cards.forEach(function(c,k){c.classList.toggle('hide',k!==0)})}
+    n.classList.add('on');document.body.classList.add('lock');
+  }
+  setTimeout(openPop,600);
+  cards.forEach(function(card,k){
+    card.querySelector('[data-close-notice]').addEventListener('click',function(){
+      if(card.querySelector('.today input').checked){try{localStorage.setItem('__gc_pop_hide',day)}catch(e){}}
+      card.classList.add('hide');
+      if(pc.matches){
+        if(cards.every(function(c){return c.classList.contains('hide')}))closeAll();
+      }else if(k===0){cards[1].classList.remove('hide')}
+      else{closeAll()}
+    });
   });
-  n.addEventListener('click',function(e){if(e.target===n)close()});
+  n.addEventListener('click',function(e){if(e.target===n)closeAll()});
+  setInterval(function(){
+    if(!n.classList.contains('on')||pc.matches)return;
+    cur=(cur+1)%cards.length;
+    cards.forEach(function(c,k){c.classList.toggle('hide',k!==cur)});
+  },4200);
 })();
 
 /* ── 라이트박스 ── */
