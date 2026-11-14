@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=no">
 <title>현장 갤러리 | 중앙하이츠 갈산역 센트럴</title>
 <meta name="description" content="중앙하이츠 갈산역 센트럴 현장·실내 갤러리. 갈산역 도보 0분, 59TYPE 단일평형 126세대. 방문예약등록 1866-2766.">
 <meta name="theme-color" content="#7935F8">
@@ -42,7 +42,7 @@ button{font:inherit;cursor:pointer;background:none;border:0}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 #lb{position:fixed;inset:0;z-index:300;background:rgba(8,10,13,.92);display:none;align-items:center;justify-content:center;padding:16px}
 #lb.on{display:flex}
-#lb img{max-width:100%;max-height:88vh;border-radius:4px}
+#lb img{max-width:100%;max-height:88vh;border-radius:4px;touch-action:none;transition:transform .08s}
 #lb .close{position:absolute;top:14px;right:16px;color:#fff;font-size:30px;padding:8px}
 footer{background:#0b0e12;color:rgba(255,255,255,.55);font-size:12px;padding:40px 0 46px;line-height:1.9}
 footer .f-top{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
@@ -105,11 +105,24 @@ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isInter
 els.forEach(function(el){io.observe(el)});
 /* 라이트박스 */
 var lb=$('#lb'),lbImg=lb.querySelector('img');
+var scale=1,px=0,py=0,ox=0,oy=0,dist=0;
+function apply(){lbImg.style.transform='translate('+ox+'px,'+oy+'px) scale('+scale+')'}
+lb.addEventListener('touchstart',function(e){
+  if(e.touches.length===2){dist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY)}
+  else if(e.touches.length===1){px=e.touches[0].clientX-ox;py=e.touches[0].clientY-oy}
+},{passive:true});
+lb.addEventListener('touchmove',function(e){
+  if(e.touches.length===2){var d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+    var ns=Math.min(5,Math.max(1,scale*(d/dist||1)));dist=d;scale=ns;apply()}
+  else if(e.touches.length===1&&scale>1){ox=e.touches[0].clientX-px;oy=e.touches[0].clientY-py;apply()}
+  e.preventDefault();
+},{passive:false});
+lb.addEventListener('touchend',function(){if(scale<=1.02){scale=1;ox=0;oy=0;apply()}});
+lb.addEventListener('click',function(){lb.classList.remove('on');lbImg.removeAttribute('src');lbImg.style.transform='';scale=1;ox=0;oy=0});
 document.addEventListener('click',function(e){
   var it=e.target.closest('.g-item');
   if(it&&it.querySelector('img')){lbImg.src=it.querySelector('img').src;lb.classList.add('on')}
 });
-lb.addEventListener('click',function(){lb.classList.remove('on');lbImg.removeAttribute('src')});
 addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('on'))lb.click()});
 })();
 </script>

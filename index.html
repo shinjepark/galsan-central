@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=no">
 <title>중앙하이츠 갈산역 센트럴 | 갈산역 0분 · 방문예약등록</title>
 <meta name="format-detection" content="telephone=no">
 <meta name="description" content="갈산역 도보 0분 초역세권, 갈산천 수변공원 1분. 중앙하이츠 갈산역 센트럴 — 3개동 126세대 · 59TYPE 단일평형. 방문예약등록 1866-2766.">
@@ -108,8 +108,8 @@ button{font:inherit;cursor:pointer;background:none;border:0}
 .hero{position:relative;height:100svh;min-height:620px;overflow:hidden;background:#101418;color:#fff}
 .hero .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
 .hero .slide.on{opacity:1}
-.hero .slide .bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.06)}
-.hero .slide.on .bg{animation:kb 7s ease forwards}
+.hero .slide .bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.6)}
+.hero .slide.on .bg{animation:kb 14s cubic-bezier(.23,.68,.32,1) forwards}
 @keyframes kb{to{transform:scale(1)}}
 .hero .slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,16,26,.26),rgba(10,16,26,.02) 42%,rgba(10,16,26,.30))}
 .hero .slide .bg{filter:saturate(1.14) contrast(1.05) brightness(1.04)}
@@ -121,7 +121,14 @@ button{font:inherit;cursor:pointer;background:none;border:0}
 .hero-site{font-family:var(--serif);font-size:clamp(16px,2vw,22px);font-weight:700;letter-spacing:.14em;color:#A8E4F4;text-shadow:0 1px 12px rgba(6,12,22,.75),0 0 22px rgba(140,220,244,.35);animation:tealGlow 3.2s ease-in-out infinite}
 .hero h1{font-family:var(--serif);font-size:clamp(30px,5.6vw,60px);font-weight:900;line-height:1.24;letter-spacing:-.02em;color:#fff;margin-top:16px;
   text-shadow:0 2px 14px rgba(6,12,22,.78),0 1px 4px rgba(6,12,22,.5)}
-.hero h1 .qm{font-size:1.08em;color:#A8E4F4;text-shadow:0 0 18px rgba(140,220,244,.55)}
+.hero h1 .qm{font-size:1.08em;color:#fff;text-shadow:0 2px 14px rgba(6,12,22,.78),0 0 18px rgba(255,255,255,.4)}
+@media(max-width:640px){
+  .hero-site{font-size:clamp(15px,4.2vw,18px);letter-spacing:.1em}
+  .hero h1{font-size:clamp(26px,7.6vw,34px);line-height:1.3;word-break:keep-all;overflow-wrap:break-word;text-wrap:balance}
+  .hero h1 br{display:none}
+  .hero .badge{font-size:12px;padding:8px 14px}
+  .hero .ctas .btn{width:100%}
+}
 /* 글로우는 h1 내부 래퍼가 담당 (fly 충돌 제거) */
 .glow{display:inline-block;animation:heroGlow 4.2s ease-in-out infinite}
 @keyframes heroGlow{0%,100%{filter:drop-shadow(0 2px 6px rgba(6,12,22,.55))}50%{filter:drop-shadow(0 0 22px rgba(168,228,244,.85)) drop-shadow(0 2px 6px rgba(6,12,22,.55))}}
@@ -151,7 +158,13 @@ button{font:inherit;cursor:pointer;background:none;border:0}
 
 /* ── 분양가 표 ── */
 #price{background:var(--soft)}
-.price-wrap{overflow-x:auto;margin-top:clamp(28px,4vw,48px);background:#fff;border-radius:6px;box-shadow:0 2px 14px rgba(16,20,24,.06)}
+.price-wrap{overflow-x:auto;margin-top:clamp(28px,4vw,48px);background:#fff;border-radius:6px;box-shadow:0 2px 14px rgba(16,20,24,.06);position:relative;scrollbar-width:thin}
+.price-wrap::before{content:'◀ 좌우로 밀어보세요 ▶';position:sticky;left:0;z-index:2;display:block;padding:8px 12px;font-size:11.5px;font-weight:700;color:var(--violet-600);background:linear-gradient(90deg,rgba(244,239,255,.95),rgba(244,239,255,.7));letter-spacing:.04em}
+@media(min-width:761px){.price-wrap::before{display:none}}
+.price-wrap::after{content:'';position:absolute;top:34px;right:0;bottom:0;width:34px;pointer-events:none;background:linear-gradient(270deg,rgba(121,53,248,.16),transparent)}
+@media(min-width:761px){.price-wrap::after{display:none}}
+@media(max-width:760px){.price-wrap thead th:first-child,.price-wrap tbody td:first-child{position:sticky;left:0;background:#fff;z-index:1;box-shadow:1px 0 0 var(--line2)}}
+.price-wrap thead th:first-child{background:var(--navy)!important}
 table.price{width:100%;min-width:560px;border-collapse:collapse;font-variant-numeric:tabular-nums}
 .price thead th{background:var(--navy);color:#fff;font-size:14px;font-weight:700;padding:15px 18px;text-align:center;letter-spacing:-.01em}
 .price tbody td{padding:14px 18px;border-bottom:1px solid var(--line2);font-size:15px;text-align:center}
@@ -272,7 +285,8 @@ footer .legal{margin-top:14px;color:rgba(255,255,255,.38);font-size:11.5px}
 #rbar{position:fixed;left:0;right:0;bottom:0;z-index:110;display:none;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(8px);box-shadow:0 -6px 24px rgba(16,20,24,.16)}
 #rbar .btn{flex:1;padding:15px 10px;font-size:14.5px}
 #rbar .btn-dark{background:var(--ink);color:#fff}
-#rbar .btn-line{border:1px solid var(--line);color:var(--ink);background:#fff}
+#rbar .btn-line{border:1px solid rgba(121,53,248,.28);color:#fff;background:var(--violet);box-shadow:0 6px 16px rgba(121,53,248,.28)}
+#rbar .btn-line:active{background:var(--violet-600)}
 #rbBubble{position:absolute;top:-12px;right:12px;background:#c0392b;color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s;pointer-events:none}
 #rbBubble::after{content:"";position:absolute;left:14px;bottom:-4px;border:4px solid transparent;border-top-color:#c0392b;border-bottom:0}
 #rbBubble.on{opacity:1;transform:none}
@@ -327,7 +341,7 @@ footer .legal{margin-top:14px;color:rgba(255,255,255,.38);font-size:11.5px}
 /* ── 라이트박스 ── */
 #lb{position:fixed;inset:0;z-index:300;background:rgba(8,10,13,.92);display:none;align-items:center;justify-content:center;padding:16px}
 #lb.on{display:flex}
-#lb img{max-width:100%;max-height:88vh;border-radius:4px;visibility:hidden}
+#lb img{max-width:100%;max-height:88vh;border-radius:4px;visibility:hidden;touch-action:none;transition:transform .08s}
 #lb img.loaded{visibility:visible}
 #lb .close{position:absolute;top:14px;right:16px;color:#fff;font-size:30px;padding:8px}
 </style>
@@ -575,7 +589,8 @@ footer .legal{margin-top:14px;color:rgba(255,255,255,.38);font-size:11.5px}
   <div class="wrap">
     <div class="sec-head reveal">
       <h2 style="margin-top:12px">현장 갤러리</h2>
-      <p class="sub">실내·공간 갤러리 — <a href="gallery.html" style="color:var(--violet-600);text-decoration:underline">전체 갤러리 보기</a></p>
+      <p class="sub">실내·공간 갤러리</p>
+      <a href="gallery.html" class="btn" style="margin-top:20px;background:var(--violet);color:#fff;border-radius:12px;box-shadow:0 8px 20px rgba(121,53,248,.24);font-size:15.5px">전체 갤러리 전체보기 →</a>
     </div>
     <div class="g-grid">
       <figure class="g-item reveal"><img src="images/gallery/gallery-01.webp" alt="갤러리 1" loading="lazy" decoding="async"></figure>
@@ -594,20 +609,17 @@ footer .legal{margin-top:14px;color:rgba(255,255,255,.38);font-size:11.5px}
   <div class="wrap">
     <div class="sec-head reveal">
       <h2 style="margin-top:12px">자주 묻는 질문</h2>
-      <p class="sub">입주자모집공고 기준 답변 · 답마다 근거 공고 표기 · 분양 가능 세대와 조건은 홍보관 확인</p>
+      <p class="sub">분양 가능 세대와 조건은 홍보관에서 확인해 안내해 드립니다</p>
     </div>
     <div class="faq-list reveal">
-      <details class="faq" open><summary><span class="qno">Q01</span>중앙하이츠 갈산역 센트럴 일반분양 끝났나요? 아직 분양하나요?<span class="arr">▼</span></summary><div class="ans">네, 전용 59㎡ 잔여세대를 선착순 특별분양으로, 청약통장 없이 지금 계약하실 수 있습니다. 최초 청약(2026년 3월 27일 입주자모집공고)은 끝났고, 2026년 9월 21일 임의공급 입주자모집공고로 10세대를 청약통장 없이 다시 모집해 18건이 접수되었으며(1.80대 1) 10월 3일 계약을 진행했습니다. 그 뒤 남은 세대를 선착순으로 안내하고 있으며, 분양 가능한 세대와 층은 홍보관(인천 부평구 부평대로 258, 1층)에서 확인해 안내해 드립니다.<span class="src">근거: 입주자모집공고(2026-03-27) · 임의공급 입주자모집공고(2026-09-21) · 청약홈 접수 결과 · 선착순 특별분양은 분양사무소 자료</span></div></details>
-      <details class="faq"><summary><span class="qno">Q02</span>분양가 얼마예요? 10% 할인은 무슨 기준인가요?<span class="arr">▼</span></summary><div class="ans">4억 2,812만 5,500원부터입니다(임의공급 입주자모집공고 기준 2층, 층·잔여 세대에 따라 다름). 층별로는 2층 4억 2,812만 5,500원, 4층 4억 3,733만 2,500원, 5~9층 4억 4,653만 9,500원, 10~14층 4억 5,574만 6,500원이며, 2026년 3월 27일 입주자모집공고의 같은 층 분양가(2층 4억 7,569만 5천 원 ~ 15~19층 5억 1,150만 원)에서 정확히 10% 내린 금액이라 「10% 할인」이라고 부릅니다. 층별로 4,700만~5,100만 원 낮아진 값입니다. 지금 분양 가능한 세대의 층과 금액은 홍보관에서 확인해 안내해 드립니다.<span class="src">근거: 임의공급 입주자모집공고(2026-09-21) p.3 · 입주자모집공고(2026-03-27) p.9</span></div></details>
-      <details class="faq"><summary><span class="qno">Q03</span>계약금·중도금·잔금은 어떻게 되나요?<span class="arr">▼</span></summary><div class="ans">계약금 5%와 잔금 95%, 두 번으로 내고 중도금은 0원입니다. 계약금은 계약하는 날 1,000만 원을 내고 나머지를 30일 안에 내며, 잔금 95%는 입주지정일에 냅니다. 처음 입주자모집공고(2026-03-27) 때는 계약금 10%·중도금 60%(이자후불제)·잔금 30%였고, 임의공급 입주자모집공고부터 계약금 5%·잔금 95%로 바뀌었습니다. 지금 분양 가능한 세대에 적용되는 납부 조건은 홍보관에서 확인해 안내해 드립니다.<span class="src">근거: 임의공급 입주자모집공고(2026-09-21) p.3 · 입주자모집공고(2026-03-27) p.9·p.39</span></div></details>
-      <details class="faq"><summary><span class="qno">Q04</span>잔금 대출 되나요? 얼마까지 나오나요?<span class="arr">▼</span></summary><div class="ans">잔금 대출은 홍보관에서 상담하실 수 있으며, 가능 여부와 한도는 금융기관이 계약자별로 심사해 정합니다. 임의공급 입주자모집공고 기준 납부 조건이 계약금 5%·잔금 95%라 잔금 비중이 크므로, 특정 대출 비율을 전제로 하기보다 본인 조건으로 미리 확인해 두시는 것이 안전합니다. 관심고객으로 등록하시면 잔금 대출 상담까지 연결해 안내해 드립니다.<span class="src">근거: 임의공급 입주자모집공고(2026-09-21) p.3(납부 조건) · 대출 가능 여부·한도는 금융기관 심사</span></div></details>
-      <details class="faq"><summary><span class="qno">Q05</span>입주 언제인가요?<span class="arr">▼</span></summary><div class="ans">2026년 11월 입주 예정입니다. 가장 최근 공고인 임의공급 입주자모집공고(2026-09-21)에 적힌 입주 예정 시기이며, 올해 3월 처음 입주자모집공고와 분양사무소 자료에는 9월로 적혀 있었습니다. 입주 시기는 공정에 따라 달라질 수 있으며, 입주지정일은 홍보관에서 확인하실 수 있습니다.<span class="src">근거: 임의공급 입주자모집공고(2026-09-21) p.2 · 입주자모집공고(2026-03-27) p.8(9월)</span></div></details>
-      <details class="faq"><summary><span class="qno">Q06</span>신축 59㎡ 전매 되나요? 거주의무 있나요?<span class="arr">▼</span></summary><div class="ans">거주의무 없음, 재당첨제한 없음, 전매제한 1년입니다. 중앙하이츠 갈산역 센트럴은 비규제지역의 민영 아파트로 분양가상한제도 적용되지 않으며, 전매제한 1년은 최초 당첨자 발표일인 2026년 4월 15일부터 셉니다. 계약하시는 세대에 적용되는 기준은 계약 전 홍보관에서 확인하시기 바랍니다.<span class="src">근거: 입주자모집공고(2026-03-27) p.1 · 임의공급 입주자모집공고(2026-09-21) p.1</span></div></details>
-      <details class="faq"><summary><span class="qno">Q07</span>학군은요? 초등학교 어디로 배정되나요?<span class="arr">▼</span></summary><div class="ans">2025학년도 통학구역 기준 갈월초등학교 관할이며, 중학교는 부평구 제5학교군 안에서 배정됩니다. 초·중학교 배정은 교육청이 학년도마다 정하는 통학구역에 따르므로, 입주 뒤 자녀가 다닐 학교는 그 해 통학구역으로 정해집니다. 입학 시기에 맞춰 교육청에 확인하시거나 홍보관에 문의하시면 안내해 드립니다.<span class="src">근거: 교육청 2025학년도 통학구역 · 입주 시 배정은 교육청 결정</span></div></details>
-      <details class="faq"><summary><span class="qno">Q08</span>지하주차장 있나요? 주차는 세대당 몇 대예요?<span class="arr">▼</span></summary><div class="ans">지하 1층 주차장이 있으며, 주차는 세대당 1대 이상입니다. 입주자모집공고에는 택배차량의 지하 주차장 출입이 제한된다고 적혀 있습니다. 지상·지하 배치와 정확한 대수는 홍보관에서 배치도로 확인하실 수 있습니다.<span class="src">근거: 입주자모집공고(2026-03-27) p.49 · 세대당 1대 이상은 사업 자료 기준</span></div></details>
-      <details class="faq"><summary><span class="qno">Q09</span>홍보관(모델하우스) 어디예요?<span class="arr">▼</span></summary><div class="ans">홍보관은 인천 부평구 부평대로 258, 1층입니다. 단지는 인천광역시 부평구 갈산동 181-11 외 1필지, 인천1호선 갈산역 2번 출구 바로 앞 도보 1분 자리입니다. 방문 전에 관심고객 등록을 남기시면 분양 가능한 세대와 상담 시간을 확인해 연락드리며, 전화 문의는 1866-2766입니다.<span class="src">근거: 임의공급 입주자모집공고(2026-09-21) p.6(홍보관 주소) · 입주자모집공고(2026-03-27) p.8(단지 주소) · 「갈산역 2번 출구 앞 도보 1분」은 분양 자료 기준</span></div></details>
-      <details class="faq"><summary><span class="qno">Q10</span>발코니 확장·시스템에어컨 무상, 정말인가요?<span class="arr">▼</span></summary><div class="ans">네, 발코니 확장과 시스템에어컨 4대는 무상이며, 선착순 특별혜택으로 제공합니다. 분양사무소 혜택으로 선착순 제공되며, 입주자모집공고상 별도 유상 옵션(1,420만 원)인 발코니 확장을 분양사무소가 무상으로 적용하는 것입니다. 선착순 제공이라 조기 종료될 수 있으므로, 계약 시점에 적용되는 혜택은 홍보관에서 확인하시기 바랍니다.<span class="src">근거: 분양사무소 자료(혜택) · 입주자모집공고(2026-03-27) 발코니 확장 옵션 금액</span></div></details>
-      <details class="faq"><summary><span class="qno">Q11</span>선착순이면 지금 바로 계약되나요?<span class="arr">▼</span></summary><div class="ans">네, 선착순 특별분양은 청약통장 없이, 청약 당첨을 기다리지 않고 계약 순서대로 진행합니다. 계약하는 날 계약금 1,000만 원을 내고 나머지 계약금은 30일 안에 내며, 잔금 95%는 입주지정일에 냅니다. 분양 가능한 세대와 층은 수시로 달라지므로, 관심고객으로 등록하시면 방문 전에 계약 가능한 세대를 확인해 안내해 드립니다.<span class="src">근거: 분양사무소 자료(선착순 특별분양) · 임의공급 입주자모집공고(2026-09-21) p.3(납부 조건)</span></div></details>
+      <details class="faq" open><summary><span class="qno">Q03</span>계약금·중도금·잔금은 어떻게 되나요?<span class="arr">▼</span></summary><div class="ans">계약금 5%와 잔금 95%, 두 번으로 내고 중도금은 0원입니다. 계약금은 계약하는 날 1,000만 원을 내고 나머지를 30일 안에 내며, 잔금 95%는 입주지정일에 냅니다. 처음 입주자모집공고(2026-03-27) 때는 계약금 10%·중도금 60%(이자후불제)·잔금 30%였고, 임의공급 입주자모집공고부터 계약금 5%·잔금 95%로 바뀌었습니다. 지금 분양 가능한 세대에 적용되는 납부 조건은 홍보관에서 확인해 안내해 드립니다.</div></details>
+      <details class="faq"><summary><span class="qno">Q04</span>잔금 대출 되나요? 얼마까지 나오나요?<span class="arr">▼</span></summary><div class="ans">잔금 대출은 홍보관에서 상담하실 수 있으며, 가능 여부와 한도는 금융기관이 계약자별로 심사해 정합니다. 임의공급 입주자모집공고 기준 납부 조건이 계약금 5%·잔금 95%라 잔금 비중이 크므로, 특정 대출 비율을 전제로 하기보다 본인 조건으로 미리 확인해 두시는 것이 안전합니다. 관심고객으로 등록하시면 잔금 대출 상담까지 연결해 안내해 드립니다.</div></details>
+      <details class="faq"><summary><span class="qno">Q05</span>입주 언제인가요?<span class="arr">▼</span></summary><div class="ans">2026년 11월 입주 예정입니다. 가장 최근 공고인 임의공급 입주자모집공고(2026-09-21)에 적힌 입주 예정 시기이며, 올해 3월 처음 입주자모집공고와 분양사무소 자료에는 9월로 적혀 있었습니다. 입주 시기는 공정에 따라 달라질 수 있으며, 입주지정일은 홍보관에서 확인하실 수 있습니다.</div></details>
+      <details class="faq"><summary><span class="qno">Q06</span>신축 59㎡ 전매 되나요? 거주의무 있나요?<span class="arr">▼</span></summary><div class="ans">거주의무 없음, 재당첨제한 없음, 전매제한 1년입니다. 중앙하이츠 갈산역 센트럴은 비규제지역의 민영 아파트로 분양가상한제도 적용되지 않으며, 전매제한 1년은 최초 당첨자 발표일인 2026년 4월 15일부터 셉니다. 계약하시는 세대에 적용되는 기준은 계약 전 홍보관에서 확인하시기 바랍니다.</div></details>
+      <details class="faq"><summary><span class="qno">Q07</span>학군은요? 초등학교 어디로 배정되나요?<span class="arr">▼</span></summary><div class="ans">2025학년도 통학구역 기준 갈월초등학교 관할이며, 중학교는 부평구 제5학교군 안에서 배정됩니다. 초·중학교 배정은 교육청이 학년도마다 정하는 통학구역에 따르므로, 입주 뒤 자녀가 다닐 학교는 그 해 통학구역으로 정해집니다. 입학 시기에 맞춰 교육청에 확인하시거나 홍보관에 문의하시면 안내해 드립니다.</div></details>
+      <details class="faq"><summary><span class="qno">Q08</span>지하주차장 있나요? 주차는 세대당 몇 대예요?<span class="arr">▼</span></summary><div class="ans">지하 1층 주차장이 있으며, 주차는 세대당 1대 이상입니다. 입주자모집공고에는 택배차량의 지하 주차장 출입이 제한된다고 적혀 있습니다. 지상·지하 배치와 정확한 대수는 홍보관에서 배치도로 확인하실 수 있습니다.</div></details>
+      <details class="faq"><summary><span class="qno">Q09</span>홍보관(모델하우스) 어디예요?<span class="arr">▼</span></summary><div class="ans">홍보관은 인천 부평구 부평대로 258, 1층입니다. 단지는 인천광역시 부평구 갈산동 181-11 외 1필지, 인천1호선 갈산역 2번 출구 바로 앞 도보 1분 자리입니다. 방문 전에 관심고객 등록을 남기시면 분양 가능한 세대와 상담 시간을 확인해 연락드리며, 전화 문의는 1866-2766입니다.</div></details>
+      <details class="faq"><summary><span class="qno">Q10</span>발코니 확장·시스템에어컨 무상, 정말인가요?<span class="arr">▼</span></summary><div class="ans">네, 발코니 확장과 시스템에어컨 4대는 무상이며, 선착순 특별혜택으로 제공합니다. 분양사무소 혜택으로 선착순 제공되며, 입주자모집공고상 별도 유상 옵션(1,420만 원)인 발코니 확장을 분양사무소가 무상으로 적용하는 것입니다. 선착순 제공이라 조기 종료될 수 있으므로, 계약 시점에 적용되는 혜택은 홍보관에서 확인하시기 바랍니다.</div></details>
     </div>
     <p class="note reveal" style="margin-top:14px">※ 답변은 입주자모집공고(2026-03-27)·임의공급 입주자모집공고(2026-09-21) 기준 · 분양 가능한 세대·조건·혜택은 분양 진행에 따라 달라질 수 있음 · 잔금 대출은 금융기관 심사에 따라 다름 · 입주 시기는 공고 기준 예정일 · 학교 배정은 교육청이 정함 · 도보 1분은 분양 자료 기준 · 중도금 없는 납부 조건·청약통장 불필요는 임의공급 입주자모집공고(2026-09-21) 기준</p>
   </div>
@@ -749,9 +761,7 @@ $$('#mnav .panel nav a').forEach(function(a){a.addEventListener('click',closeMna
     slides[cur].classList.add('on');dots[cur].classList.add('on');
     var n=$('#pgNow');if(n)n.textContent=('0'+(cur+1)).slice(-2);
   }
-  function play(){timer=setInterval(function(){go(cur+1)},6000)}
-  dots.forEach(function(d,i){d.addEventListener('click',function(){clearInterval(timer);go(i);play()})});
-  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)play();
+  dots.forEach(function(d,i){d.addEventListener('click',function(){go(i)})});
 })();
 
 /* ── 유입경로 ── */
@@ -894,6 +904,23 @@ form.addEventListener('submit',function(e){
 
 /* ── 라이트박스 ── */
 var lb=$('#lb'),lbImg=lb.querySelector('img');
+/* 라이트박스 안에서만 핀치줌 + 드래그 팬 */
+(function(){
+  var scale=1,px=0,py=0,ox=0,oy=0,dist=0;
+  function apply(){lbImg.style.transform='translate('+ox+'px,'+oy+'px) scale('+scale+')'}
+  lb.addEventListener('touchstart',function(e){
+    if(e.touches.length===2){dist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY)}
+    else if(e.touches.length===1){px=e.touches[0].clientX-ox;py=e.touches[0].clientY-oy}
+  },{passive:true});
+  lb.addEventListener('touchmove',function(e){
+    if(e.touches.length===2){var d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+      var ns=Math.min(5,Math.max(1,scale*(d/dist||1)));dist=d;scale=ns;apply()}
+    else if(e.touches.length===1&&scale>1){ox=e.touches[0].clientX-px;oy=e.touches[0].clientY-py;apply()}
+    e.preventDefault();
+  },{passive:false});
+  lb.addEventListener('touchend',function(){if(scale<=1.02){scale=1;ox=0;oy=0;apply()}});
+})();
+var lb0=$('#lb'),lbImg0=lb0.querySelector('img');
 document.addEventListener('click',function(e){
   var shot=e.target.closest('.shot');
   if(shot&&shot.querySelector('img')){
@@ -902,7 +929,7 @@ document.addEventListener('click',function(e){
     lb.classList.add('on');document.body.classList.add('lock');
   }
 });
-lb.addEventListener('click',function(){lb.classList.remove('on');document.body.classList.remove('lock');lbImg.classList.remove('loaded');setTimeout(function(){lbImg.removeAttribute('src')},200)});
+lb.addEventListener('click',function(){lb.classList.remove('on');document.body.classList.remove('lock');lbImg.classList.remove('loaded');lbImg.style.transform='';scale=1;ox=0;oy=0;setTimeout(function(){lbImg.removeAttribute('src')},200)});
 addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('on'))lb.click()});
 })();
 </script>
