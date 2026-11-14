@@ -28,7 +28,6 @@
 <link rel="icon" href="images/favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 <link rel="preload" as="image" href="images/site/hero-main.webp" fetchpriority="high">
-<link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/woff2/PretendardVariable.woff2" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/moonhoo980/NotoSerifKR@main/NotoSerifKR.min.css">
 <script src="/oc-pixel-config.js" defer></script>
@@ -386,7 +385,6 @@ footer .legal{margin-top:14px;color:rgba(255,255,255,.38);font-size:11.5px}
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="top">
   <div class="slide on"><div class="bg" style="background-image:url(images/site/hero-main.webp)"></div></div>
-  <div class="slide"><div class="bg" style="background-image:url(images/site/slide2.webp)"></div></div>
   <div class="wrap in">
     <div class="hero-site fly d1">중앙하이츠 갈산역 센트럴</div>
     <h1 class="fly d2"><span class="glow"><span class="qm">“</span>갈산역 「0분」의 가치,<br>걸어서 누리는 완성된 프리미엄<span class="qm">”</span></span></h1>
@@ -713,14 +711,14 @@ footer .legal{margin-top:14px;color:rgba(255,255,255,.38);font-size:11.5px}
 <div id="notice" role="dialog" aria-modal="true" aria-label="안내 팝업">
   <div class="popups">
     <div class="card" data-pop="0">
-      <img class="pop" src="images/popup-1.jpg" alt="중앙하이츠 갈산역 센트럴 즉시입주 안내">
+      <img class="pop" data-src="images/popup-1.webp" alt="중앙하이츠 갈산역 센트럴 즉시입주 안내">
       <div class="foot">
         <label class="today"><input type="checkbox" class="todayCheck"><span>오늘 하루 열지 않기</span></label>
         <button class="bt-close" data-close-notice>닫기</button>
       </div>
     </div>
     <div class="card" data-pop="1">
-      <img class="pop" src="images/popup-2.jpg" alt="갈산역 센트럴 파격 할인 선착순 특별분양 안내">
+      <img class="pop" data-src="images/popup-2.webp" alt="갈산역 센트럴 파격 할인 선착순 특별분양 안내">
       <div class="foot">
         <label class="today"><input type="checkbox" class="todayCheck"><span>오늘 하루 열지 않기</span></label>
         <button class="bt-close" data-close-notice>닫기</button>
@@ -900,7 +898,10 @@ form.addEventListener('submit',function(e){
     else{cur=0;cards.forEach(function(c,k){c.classList.toggle('hide',k!==0)})}
     n.classList.add('on');document.body.classList.add('lock');
   }
-  setTimeout(openPop,600);
+  setTimeout(function(){
+    $$('#notice .pop').forEach(function(im){if(im.dataset.src)im.src=im.dataset.src});
+    openPop();
+  },600);
   cards.forEach(function(card,k){
     card.querySelector('[data-close-notice]').addEventListener('click',function(){
       if(card.querySelector('.today input').checked){try{localStorage.setItem('__gc_pop_hide',day)}catch(e){}}
