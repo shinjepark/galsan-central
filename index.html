@@ -58,7 +58,7 @@ button{font:inherit;cursor:pointer;background:none;border:0}
 /* ── HEADER ── */
 #header{position:fixed;top:0;left:0;right:0;z-index:110;transition:background .3s,box-shadow .3s}
 #header .in{display:flex;align-items:center;justify-content:space-between;height:var(--hd);position:relative}
-.logo{display:flex;align-items:center;background:#fff;padding:8px 16px;border-radius:12px;border:1px solid rgba(16,20,24,.08);box-shadow:0 2px 12px rgba(16,20,24,.08)}
+.logo{display:flex;align-items:center;border-radius:10px;overflow:hidden}
 .logo-img{height:44px;width:auto;display:block}
 #header .gnb{display:flex;gap:22px}
 #header .gnb>a{color:#fff;font-size:clamp(16px,1.5vw,21px);font-weight:700;position:relative;padding:6px 0}
@@ -71,7 +71,6 @@ button{font:inherit;cursor:pointer;background:none;border:0}
 @media(min-width:1101px){.bt-tel{display:block}}
 @media(max-width:1100px){#header .gnb{display:none}}
 #header.solid{background:rgba(255,255,255,.94);backdrop-filter:blur(8px);box-shadow:0 1px 0 var(--line2)}
-#header.solid .logo{border-color:var(--line)}
 #header.solid .gnb>a,#header.solid .bt-tel{color:var(--navy)}
 #header.solid .bt-cs{background:var(--violet-600);color:#fff}
 /* 모바일 헤더: 가운데 반짝이는 전화번호 + 햄버거 */
@@ -79,7 +78,8 @@ button{font:inherit;cursor:pointer;background:none;border:0}
 .m-btn{display:none}
 @media(max-width:1100px){
   :root{--hd:64px}
-  .m-tel{display:block;flex:1 1 auto;min-width:0;text-align:center;color:#fff;font-size:18px;font-weight:800;letter-spacing:.02em;white-space:nowrap;animation:sparkle 1.8s ease-in-out infinite}
+  .m-tel{display:block;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#fff;font-size:18px;font-weight:800;letter-spacing:.02em;white-space:nowrap;animation:sparkle 1.8s ease-in-out infinite;pointer-events:none}
+.m-tel-link{display:block;position:absolute;inset:0 25% 0 35%;}
   #header.solid .m-tel{color:var(--navy);text-shadow:none}
   .bt-cs{display:none}
   .m-btn{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:46px;height:46px;padding:11px 10px;border-radius:10px;background:rgba(255,255,255,.16);backdrop-filter:blur(3px);flex:0 0 auto}
@@ -89,8 +89,7 @@ button{font:inherit;cursor:pointer;background:none;border:0}
   .m-btn.on i:nth-child(1){transform:translateY(7.6px) rotate(45deg)}
   .m-btn.on i:nth-child(2){opacity:0}
   .m-btn.on i:nth-child(3){transform:translateY(-7.6px) rotate(-45deg)}
-  .logo{padding:6px 12px}
-  .logo-img{height:34px}
+  .logo-img{height:32px}
 }
 @keyframes sparkle{0%,100%{opacity:.88;text-shadow:0 0 0 rgba(255,255,255,0)}50%{opacity:1;text-shadow:0 0 12px rgba(255,255,255,.95),0 0 24px rgba(121,53,248,.55)}}
 /* 모바일 메뉴 드로어 */
@@ -612,14 +611,14 @@ footer .legal{margin-top:14px;color:rgba(255,255,255,.38);font-size:11.5px}
       <p class="sub">분양 가능 세대와 조건은 홍보관에서 확인해 안내해 드립니다</p>
     </div>
     <div class="faq-list reveal">
-      <details class="faq" open><summary><span class="qno">Q03</span>계약금·중도금·잔금은 어떻게 되나요?<span class="arr">▼</span></summary><div class="ans">계약금 5%와 잔금 95%, 두 번으로 내고 중도금은 0원입니다. 계약금은 계약하는 날 1,000만 원을 내고 나머지를 30일 안에 내며, 잔금 95%는 입주지정일에 냅니다. 처음 입주자모집공고(2026-03-27) 때는 계약금 10%·중도금 60%(이자후불제)·잔금 30%였고, 임의공급 입주자모집공고부터 계약금 5%·잔금 95%로 바뀌었습니다. 지금 분양 가능한 세대에 적용되는 납부 조건은 홍보관에서 확인해 안내해 드립니다.</div></details>
-      <details class="faq"><summary><span class="qno">Q04</span>잔금 대출 되나요? 얼마까지 나오나요?<span class="arr">▼</span></summary><div class="ans">잔금 대출은 홍보관에서 상담하실 수 있으며, 가능 여부와 한도는 금융기관이 계약자별로 심사해 정합니다. 임의공급 입주자모집공고 기준 납부 조건이 계약금 5%·잔금 95%라 잔금 비중이 크므로, 특정 대출 비율을 전제로 하기보다 본인 조건으로 미리 확인해 두시는 것이 안전합니다. 관심고객으로 등록하시면 잔금 대출 상담까지 연결해 안내해 드립니다.</div></details>
-      <details class="faq"><summary><span class="qno">Q05</span>입주 언제인가요?<span class="arr">▼</span></summary><div class="ans">2026년 11월 입주 예정입니다. 가장 최근 공고인 임의공급 입주자모집공고(2026-09-21)에 적힌 입주 예정 시기이며, 올해 3월 처음 입주자모집공고와 분양사무소 자료에는 9월로 적혀 있었습니다. 입주 시기는 공정에 따라 달라질 수 있으며, 입주지정일은 홍보관에서 확인하실 수 있습니다.</div></details>
-      <details class="faq"><summary><span class="qno">Q06</span>신축 59㎡ 전매 되나요? 거주의무 있나요?<span class="arr">▼</span></summary><div class="ans">거주의무 없음, 재당첨제한 없음, 전매제한 1년입니다. 중앙하이츠 갈산역 센트럴은 비규제지역의 민영 아파트로 분양가상한제도 적용되지 않으며, 전매제한 1년은 최초 당첨자 발표일인 2026년 4월 15일부터 셉니다. 계약하시는 세대에 적용되는 기준은 계약 전 홍보관에서 확인하시기 바랍니다.</div></details>
-      <details class="faq"><summary><span class="qno">Q07</span>학군은요? 초등학교 어디로 배정되나요?<span class="arr">▼</span></summary><div class="ans">2025학년도 통학구역 기준 갈월초등학교 관할이며, 중학교는 부평구 제5학교군 안에서 배정됩니다. 초·중학교 배정은 교육청이 학년도마다 정하는 통학구역에 따르므로, 입주 뒤 자녀가 다닐 학교는 그 해 통학구역으로 정해집니다. 입학 시기에 맞춰 교육청에 확인하시거나 홍보관에 문의하시면 안내해 드립니다.</div></details>
-      <details class="faq"><summary><span class="qno">Q08</span>지하주차장 있나요? 주차는 세대당 몇 대예요?<span class="arr">▼</span></summary><div class="ans">지하 1층 주차장이 있으며, 주차는 세대당 1대 이상입니다. 입주자모집공고에는 택배차량의 지하 주차장 출입이 제한된다고 적혀 있습니다. 지상·지하 배치와 정확한 대수는 홍보관에서 배치도로 확인하실 수 있습니다.</div></details>
-      <details class="faq"><summary><span class="qno">Q09</span>홍보관(모델하우스) 어디예요?<span class="arr">▼</span></summary><div class="ans">홍보관은 인천 부평구 부평대로 258, 1층입니다. 단지는 인천광역시 부평구 갈산동 181-11 외 1필지, 인천1호선 갈산역 2번 출구 바로 앞 도보 1분 자리입니다. 방문 전에 관심고객 등록을 남기시면 분양 가능한 세대와 상담 시간을 확인해 연락드리며, 전화 문의는 1866-2766입니다.</div></details>
-      <details class="faq"><summary><span class="qno">Q10</span>발코니 확장·시스템에어컨 무상, 정말인가요?<span class="arr">▼</span></summary><div class="ans">네, 발코니 확장과 시스템에어컨 4대는 무상이며, 선착순 특별혜택으로 제공합니다. 분양사무소 혜택으로 선착순 제공되며, 입주자모집공고상 별도 유상 옵션(1,420만 원)인 발코니 확장을 분양사무소가 무상으로 적용하는 것입니다. 선착순 제공이라 조기 종료될 수 있으므로, 계약 시점에 적용되는 혜택은 홍보관에서 확인하시기 바랍니다.</div></details>
+      <details class="faq" open><summary><span class="qno">Q01</span>계약금·중도금·잔금은 어떻게 되나요?<span class="arr">▼</span></summary><div class="ans">계약금 5%와 잔금 95%, 두 번으로 내고 중도금은 0원입니다. 계약금은 계약하는 날 1,000만 원을 내고 나머지를 30일 안에 내며, 잔금 95%는 입주지정일에 냅니다. 처음 입주자모집공고(2026-03-27) 때는 계약금 10%·중도금 60%(이자후불제)·잔금 30%였고, 임의공급 입주자모집공고부터 계약금 5%·잔금 95%로 바뀌었습니다. 지금 분양 가능한 세대에 적용되는 납부 조건은 홍보관에서 확인해 안내해 드립니다.</div></details>
+      <details class="faq"><summary><span class="qno">Q02</span>잔금 대출 되나요? 얼마까지 나오나요?<span class="arr">▼</span></summary><div class="ans">잔금 대출은 홍보관에서 상담하실 수 있으며, 가능 여부와 한도는 금융기관이 계약자별로 심사해 정합니다. 임의공급 입주자모집공고 기준 납부 조건이 계약금 5%·잔금 95%라 잔금 비중이 크므로, 특정 대출 비율을 전제로 하기보다 본인 조건으로 미리 확인해 두시는 것이 안전합니다. 관심고객으로 등록하시면 잔금 대출 상담까지 연결해 안내해 드립니다.</div></details>
+      <details class="faq"><summary><span class="qno">Q03</span>입주 언제인가요?<span class="arr">▼</span></summary><div class="ans">2026년 11월 입주 예정입니다. 가장 최근 공고인 임의공급 입주자모집공고(2026-09-21)에 적힌 입주 예정 시기이며, 올해 3월 처음 입주자모집공고와 분양사무소 자료에는 9월로 적혀 있었습니다. 입주 시기는 공정에 따라 달라질 수 있으며, 입주지정일은 홍보관에서 확인하실 수 있습니다.</div></details>
+      <details class="faq"><summary><span class="qno">Q04</span>신축 59㎡ 전매 되나요? 거주의무 있나요?<span class="arr">▼</span></summary><div class="ans">거주의무 없음, 재당첨제한 없음, 전매제한 1년입니다. 중앙하이츠 갈산역 센트럴은 비규제지역의 민영 아파트로 분양가상한제도 적용되지 않으며, 전매제한 1년은 최초 당첨자 발표일인 2026년 4월 15일부터 셉니다. 계약하시는 세대에 적용되는 기준은 계약 전 홍보관에서 확인하시기 바랍니다.</div></details>
+      <details class="faq"><summary><span class="qno">Q05</span>학군은요? 초등학교 어디로 배정되나요?<span class="arr">▼</span></summary><div class="ans">2025학년도 통학구역 기준 갈월초등학교 관할이며, 중학교는 부평구 제5학교군 안에서 배정됩니다. 초·중학교 배정은 교육청이 학년도마다 정하는 통학구역에 따르므로, 입주 뒤 자녀가 다닐 학교는 그 해 통학구역으로 정해집니다. 입학 시기에 맞춰 교육청에 확인하시거나 홍보관에 문의하시면 안내해 드립니다.</div></details>
+      <details class="faq"><summary><span class="qno">Q06</span>지하주차장 있나요? 주차는 세대당 몇 대예요?<span class="arr">▼</span></summary><div class="ans">지하 1층 주차장이 있으며, 주차는 세대당 1대 이상입니다. 입주자모집공고에는 택배차량의 지하 주차장 출입이 제한된다고 적혀 있습니다. 지상·지하 배치와 정확한 대수는 홍보관에서 배치도로 확인하실 수 있습니다.</div></details>
+      <details class="faq"><summary><span class="qno">Q07</span>홍보관(모델하우스) 어디예요?<span class="arr">▼</span></summary><div class="ans">홍보관은 인천 부평구 부평대로 258, 1층입니다. 단지는 인천광역시 부평구 갈산동 181-11 외 1필지, 인천1호선 갈산역 2번 출구 바로 앞 도보 1분 자리입니다. 방문 전에 관심고객 등록을 남기시면 분양 가능한 세대와 상담 시간을 확인해 연락드리며, 전화 문의는 1866-2766입니다.</div></details>
+      <details class="faq"><summary><span class="qno">Q08</span>발코니 확장·시스템에어컨 무상, 정말인가요?<span class="arr">▼</span></summary><div class="ans">네, 발코니 확장과 시스템에어컨 4대는 무상이며, 선착순 특별혜택으로 제공합니다. 분양사무소 혜택으로 선착순 제공되며, 입주자모집공고상 별도 유상 옵션(1,420만 원)인 발코니 확장을 분양사무소가 무상으로 적용하는 것입니다. 선착순 제공이라 조기 종료될 수 있으므로, 계약 시점에 적용되는 혜택은 홍보관에서 확인하시기 바랍니다.</div></details>
     </div>
     <p class="note reveal" style="margin-top:14px">※ 답변은 입주자모집공고(2026-03-27)·임의공급 입주자모집공고(2026-09-21) 기준 · 분양 가능한 세대·조건·혜택은 분양 진행에 따라 달라질 수 있음 · 잔금 대출은 금융기관 심사에 따라 다름 · 입주 시기는 공고 기준 예정일 · 학교 배정은 교육청이 정함 · 도보 1분은 분양 자료 기준 · 중도금 없는 납부 조건·청약통장 불필요는 임의공급 입주자모집공고(2026-09-21) 기준</p>
   </div>
